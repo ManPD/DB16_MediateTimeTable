@@ -3,7 +3,7 @@ NullProtocol/DB16_MeditateTimeTable
 
 ▣ 조원<br>
 B289014 / 김만수<br>
-B / 신찬용<br>
+B489037 / 신찬용<br>
 B189093 / 최효준<br>
 
 ▣ 프로젝트 요구사항<br>
