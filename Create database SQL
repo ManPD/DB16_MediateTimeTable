@@ -1,0 +1,94 @@
+use hongik;
+CREATE TABLE 매니저
+(
+	이름                 VARCHAR(5) NOT NULL,
+	나이                 INTEGER NULL,
+	성별                 CHAR(2) NULL,
+	연락처               VARCHAR(13) NULL,
+	소속사_번호          INTEGER NOT NULL
+);
+
+ALTER TABLE 매니저
+ADD CONSTRAINT XPK매니저 PRIMARY KEY (이름);
+
+CREATE TABLE 소속사
+(
+	번호                 INTEGER NOT NULL,
+	이름                 VARCHAR(5) NULL,
+	주소                 VARCHAR(50) NULL,
+	전화번호             VARCHAR(13) NULL
+);
+
+ALTER TABLE 소속사
+ADD CONSTRAINT XPK소속사 PRIMARY KEY (번호);
+
+CREATE TABLE 스케줄_시스템
+(
+	번호                 CHAR(18) NOT NULL,
+	시간                 DATE NULL,
+	장소                 VARCHAR(50) NULL,
+	내용                 VARCHAR(50) NULL,
+	담당_연예인          VARCHAR(5) NOT NULL,
+	담당_매니져          VARCHAR(5) NOT NULL
+);
+
+ALTER TABLE 스케줄_시스템
+ADD CONSTRAINT XPK스케줄_시스템 PRIMARY KEY (번호);
+
+CREATE TABLE 연예인
+(
+	이름                 VARCHAR(5) NOT NULL,
+	성별                 CHAR(2) NULL,
+	나이                 INTEGER NULL,
+	연락처               VARCHAR(13) NULL,
+	소속사_번호          INTEGER NOT NULL
+);
+
+ALTER TABLE 연예인
+ADD CONSTRAINT XPK연예인 PRIMARY KEY (이름);
+
+CREATE TABLE 주소
+(
+	시                   CHAR(10) NOT NULL,
+	군                   CHAR(10) NULL,
+	구                   CHAR(10) NULL,
+	우편번호             INTEGER NOT NULL
+);
+
+ALTER TABLE 주소
+ADD CONSTRAINT XPK주소 PRIMARY KEY (시,우편번호);
+
+CREATE TABLE 주소_소속사
+(
+	시                   CHAR(10) NOT NULL,
+	우편번호             INTEGER NOT NULL,
+	번호                 INTEGER NOT NULL
+);
+
+ALTER TABLE 주소_소속사
+ADD CONSTRAINT XPK주소_소속사 PRIMARY KEY (시,우편번호,번호);
+
+ALTER TABLE 매니저
+ADD CONSTRAINT R_13 FOREIGN KEY (소속사_번호) REFERENCES 소속사 (번호);
+
+ALTER TABLE 스케줄_시스템
+ADD CONSTRAINT R_3 FOREIGN KEY (담당_연예인) REFERENCES 연예인 (이름);
+
+ALTER TABLE 스케줄_시스템
+ADD CONSTRAINT R_14 FOREIGN KEY (담당_매니져) REFERENCES 매니저 (이름);
+
+ALTER TABLE 연예인
+ADD CONSTRAINT R_1 FOREIGN KEY (소속사_번호) REFERENCES 소속사 (번호);
+
+ALTER TABLE 주소_소속사
+ADD CONSTRAINT R_8 FOREIGN KEY (시, 우편번호) REFERENCES 주소 (시, 우편번호);
+
+ALTER TABLE 주소_소속사
+ADD CONSTRAINT R_9 FOREIGN KEY (번호) REFERENCES 소속사 (번호);
+
+drop table 주소_소속사;
+
+create table 유저(
+id varchar(10) primary key not null unique,
+pw varchar(15) not null
+);
