@@ -1,15 +1,4 @@
 
-CREATE TABLE Address
-(
-	City                 CHAR(10) NOT NULL,
-	Gun                  CHAR(10) NULL,
-	Gu                   CHAR(10) NULL,
-	Zipcode              INTEGER NOT NULL
-);
-
-ALTER TABLE Address
-ADD CONSTRAINT XPKAddress PRIMARY KEY (City,Zipcode);
-
 CREATE TABLE Company
 (
 	Num                  INTEGER NOT NULL,
